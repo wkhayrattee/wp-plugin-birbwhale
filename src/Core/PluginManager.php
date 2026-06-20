@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BirbWhale\Core;
 
-use BirbWhale\Admin\LogPage;
 use BirbWhale\Admin\SettingsPage;
+use BirbWhale\Admin\Shell;
 use BirbWhale\Provider\DeepSeekProvider;
 use WordPress\AiClient\AiClient;
 
@@ -174,7 +174,9 @@ class PluginManager
     }
 
     /**
-     * Register the admin menu (top-level settings + Log submenu).
+     * Register the admin menu — a single top-level BirbWhale page. All sections
+     * (Dashboard, Settings, Log) render inside the app shell via the `view` arg,
+     * so there is only one menu item with an in-page sidebar.
      *
      * @since 1.0.0
      */
@@ -193,33 +195,36 @@ class PluginManager
             __('BirbWhale', 'birbwhale'),
             __('BirbWhale', 'birbwhale'),
             $capability,
-            Enum::MENU_SLUG_SETTINGS,
-            [SettingsPage::class, 'render'],
-            'dashicons-rest-api',
-            80
+            Enum::MENU_SLUG,
+            [Shell::class, 'render'],
+            self::menuIcon(),
+            Enum::MENU_POSITION
         );
 
+        // Relabel the auto-created duplicate submenu to "Dashboard" so the single
+        // menu reads cleanly (sub-sections live in the in-page sidebar, not here).
         add_submenu_page(
-            Enum::MENU_SLUG_SETTINGS,
-            __('BirbWhale Settings', 'birbwhale'),
-            __('Settings', 'birbwhale'),
+            Enum::MENU_SLUG,
+            __('BirbWhale', 'birbwhale'),
+            __('Dashboard', 'birbwhale'),
             $capability,
-            Enum::MENU_SLUG_SETTINGS,
-            [SettingsPage::class, 'render']
-        );
-
-        add_submenu_page(
-            Enum::MENU_SLUG_SETTINGS,
-            __('BirbWhale Log', 'birbwhale'),
-            __('Log', 'birbwhale'),
-            $capability,
-            Enum::MENU_SLUG_LOG,
-            [LogPage::class, 'render']
+            Enum::MENU_SLUG,
+            [Shell::class, 'render']
         );
     }
 
     /**
-     * Enqueue admin assets only on BirbWhale pages.
+     * The admin menu icon — the DeepSeek dolphin SVG.
+     *
+     * @since 1.0.0
+     */
+    private static function menuIcon(): string
+    {
+        return BIRBWHALE_URL . 'assets/images/deepseek.svg';
+    }
+
+    /**
+     * Enqueue admin assets only on the BirbWhale page.
      *
      * @since 1.0.0
      *
@@ -227,12 +232,7 @@ class PluginManager
      */
     public static function enqueueAdminAssets(string $hook): void
     {
-        $our_pages = [
-            'toplevel_page_' . Enum::MENU_SLUG_SETTINGS,
-            Enum::MENU_SLUG_SETTINGS . '_page_' . Enum::MENU_SLUG_LOG,
-        ];
-
-        if (!in_array($hook, $our_pages, true)) {
+        if ('toplevel_page_' . Enum::MENU_SLUG !== $hook) {
             return;
         }
 

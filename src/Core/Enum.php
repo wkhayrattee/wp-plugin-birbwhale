@@ -27,9 +27,16 @@ class Enum
     // Capabilities.
     public const ADMIN_CAPABILITY = 'manage_options';
 
-    // Admin page slugs.
-    public const MENU_SLUG_SETTINGS = 'birbwhale';
-    public const MENU_SLUG_LOG = 'birbwhale-log';
+    // Admin menu: a single top-level page. Sub-sections route via the `view` query
+    // arg and render inside the app shell (one menu, in-page sidebar navigation).
+    public const MENU_SLUG = 'birbwhale';
+    public const MENU_POSITION = 80;
+
+    // App-shell views (whitelisted; anything else falls back to the dashboard).
+    public const SHELL_VIEW_PARAM = 'view';
+    public const VIEW_DASHBOARD = 'dashboard';
+    public const VIEW_SETTINGS = 'settings';
+    public const VIEW_LOG = 'log';
 
     // Settings API.
     public const SETTINGS_OPTION_GROUP = 'birbwhale_settings_group';

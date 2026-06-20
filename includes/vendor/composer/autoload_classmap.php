@@ -8,6 +8,7 @@ $baseDir = dirname(dirname($vendorDir));
 return array(
     'BirbWhale\\Admin\\LogPage' => $baseDir . '/src/Admin/LogPage.php',
     'BirbWhale\\Admin\\SettingsPage' => $baseDir . '/src/Admin/SettingsPage.php',
+    'BirbWhale\\Admin\\Shell' => $baseDir . '/src/Admin/Shell.php',
     'BirbWhale\\Core\\Enum' => $baseDir . '/src/Core/Enum.php',
     'BirbWhale\\Core\\PluginManager' => $baseDir . '/src/Core/PluginManager.php',
     'BirbWhale\\Core\\Utils' => $baseDir . '/src/Core/Utils.php',

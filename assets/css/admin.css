@@ -1,46 +1,347 @@
-/* BirbWhale admin styles */
+/**
+ * BirbWhale admin — branded "app shell" styled after the CaptainBirb theme
+ * (navy + teal, serif wordmark). Header bar + dark in-page sidebar rail + light
+ * content panel. Enqueued only on the BirbWhale admin page.
+ *
+ * Palette mirrors the CaptainBirb Tailwind theme:
+ *   navy #001F3F · teal #39CCCC · gold #D4AF37 · offwhite #F5F5F5
+ */
 
-.birbwhale-wrap .birbwhale-intro {
-    max-width: 720px;
-    font-size: 14px;
+:root {
+    --bw-navy:    #001F3F;
+    --bw-navy-2:  #0a2d52;
+    --bw-teal:    #39CCCC;
+    --bw-teal-d:  #1f8f8f;
+    --bw-gold:    #D4AF37;
+    --bw-ink:     #1d2327;
+    --bw-muted:   #50575e;
+    --bw-line:    #e2e4e7;
+    --bw-soft:    #f6f7f9;
+    --bw-ok:      #1a7f37;
+    --bw-todo:    #8a5700;
 }
 
-.birbwhale-status {
-    max-width: 720px;
-    margin: 16px 0 24px;
+/* ── Shell frame ─────────────────────────────────────────────────── */
+
+.bw-shell {
+    margin: 12px 20px 0 2px;
+}
+
+.bw-shell__bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--bw-navy) 0%, var(--bw-navy-2) 100%);
+    border: 1px solid var(--bw-navy);
+    border-bottom: 2px solid var(--bw-teal);
+    border-radius: 10px 10px 0 0;
+    padding: 15px 20px;
+}
+
+.bw-shell__mark {
+    display: block;
+    width: 34px;
+    height: 34px;
+    filter: drop-shadow(0 0 6px rgba(57, 204, 204, 0.45));
+}
+
+.bw-shell__brand {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #fff;
+}
+
+.bw-shell__brand::after {
+    content: ".";
+    color: var(--bw-teal);
+}
+
+.bw-shell__tag {
+    margin-left: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bw-teal);
+    background: rgba(57, 204, 204, 0.14);
+    border: 1px solid rgba(57, 204, 204, 0.4);
+    border-radius: 999px;
+    padding: 3px 12px;
+}
+
+.bw-shell__body {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--bw-line);
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* ── Dark in-page sidebar rail ───────────────────────────────────── */
+
+.bw-shell__nav {
+    flex: 0 0 240px;
+    background: var(--bw-navy);
+    padding: 14px 0;
+}
+
+.bw-shell__nav ul {
+    margin: 0;
+    list-style: none;
+}
+
+.bw-nav__group {
+    padding: 16px 20px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.45);
+}
+
+.bw-nav__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: rgba(245, 245, 245, 0.85);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+}
+
+.bw-nav__item:hover:not(.is-disabled) {
+    background: rgba(57, 204, 204, 0.10);
+    color: #fff;
+}
+
+.bw-nav__item.is-active {
+    background: rgba(57, 204, 204, 0.14);
+    border-left-color: var(--bw-teal);
+    color: #fff;
+    font-weight: 600;
+}
+
+.bw-nav__item .dashicons {
+    color: inherit;
+    opacity: 0.9;
+}
+
+.bw-nav__item.is-disabled {
+    color: rgba(245, 245, 245, 0.4);
+    cursor: default;
+}
+
+.bw-nav__label {
+    flex: 1;
+}
+
+.bw-nav__badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--bw-navy);
+    background: var(--bw-teal);
+    border-radius: 999px;
+    padding: 1px 8px;
+}
+
+/* ── Content panel ───────────────────────────────────────────────── */
+
+.bw-shell__content {
+    flex: 1 1 auto;
+    padding: 26px 30px;
+    min-width: 0;
+    background: #fff;
+    color: var(--bw-ink);
+}
+
+.bw-shell__content .wp-header-end {
+    display: none;
+}
+
+.bw-section__title {
+    margin: 0 0 6px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    color: var(--bw-navy);
+}
+
+.bw-section__lead {
+    margin: 0 0 18px;
+    color: var(--bw-muted);
+    max-width: 62ch;
+}
+
+.bw-subhead {
+    margin: 28px 0 6px;
+    font-size: 15px;
+    color: var(--bw-navy);
+}
+
+/* Callout banner */
+.bw-callout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 760px;
+    margin: 0 0 20px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.bw-callout.is-ok   { background: #edfaef; color: var(--bw-ok);   border: 1px solid #b8e6c2; }
+.bw-callout.is-todo { background: #fcf6e8; color: var(--bw-todo); border: 1px solid #f0d9b3; }
+
+/* Status list */
+.bw-statuslist {
+    max-width: 760px;
+    margin: 0 0 20px;
     padding: 0;
     list-style: none;
 }
 
-.birbwhale-status li {
+.bw-statuslist li {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bw-muted);
+}
+
+.bw-statuslist li.is-ok    { color: var(--bw-ok); }
+.bw-statuslist li.is-todo  { color: var(--bw-todo); }
+.bw-statuslist li.is-error { color: #b32d2e; }
+
+/* Cards */
+.bw-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    max-width: 760px;
+}
+
+.bw-card {
+    border: 1px solid var(--bw-line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    max-width: 760px;
+}
+
+.bw-card h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--bw-navy);
+}
+
+.bw-card a {
+    color: var(--bw-teal-d);
+    text-decoration: none;
     font-weight: 600;
 }
 
-.birbwhale-status .is-ok,
-.birbwhale-status li.is-ok {
-    color: #1a7f37;
+.bw-status {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: var(--bw-muted);
 }
 
-.birbwhale-status li.is-ok .dashicons {
-    color: #1a7f37;
+.bw-status.is-ok   { color: var(--bw-ok);   font-weight: 600; }
+.bw-status.is-todo { color: var(--bw-todo); font-weight: 600; }
+
+.bw-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.birbwhale-status li.is-warn {
-    color: #8a5700;
+.bw-log {
+    font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
 }
 
-.birbwhale-status li.is-warn .dashicons {
-    color: #8a5700;
+/* ── Fields + buttons (branded, rounded) ─────────────────────────── */
+
+.bw-shell input[type="text"],
+.bw-shell input[type="password"],
+.bw-shell input[type="email"],
+.bw-shell input[type="url"],
+.bw-shell input[type="number"],
+.bw-shell input[type="search"],
+.bw-shell select,
+.bw-shell textarea {
+    border: 1px solid var(--bw-line);
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #fff;
+    color: var(--bw-ink);
+    box-shadow: none;
 }
 
-.birbwhale-status li.is-error {
-    color: #b32d2e;
+.bw-shell input:focus,
+.bw-shell select:focus,
+.bw-shell textarea:focus {
+    border-color: var(--bw-teal);
+    box-shadow: 0 0 0 3px rgba(57, 204, 204, 0.25);
+    outline: 2px solid transparent;
 }
 
-.birbwhale-status li.is-error .dashicons {
-    color: #b32d2e;
+.bw-shell .button,
+.bw-shell .button-secondary,
+.bw-shell .button-primary,
+.bw-shell button.button,
+.bw-shell input.button {
+    border-radius: 8px;
+}
+
+.bw-shell .button-secondary {
+    color: var(--bw-navy);
+    border-color: #c3c9d0;
+}
+
+.bw-shell .button-primary {
+    background: var(--bw-navy);
+    border-color: var(--bw-navy);
+    color: #fff;
+}
+
+.bw-shell .button-primary:hover,
+.bw-shell .button-primary:focus {
+    background: var(--bw-navy-2);
+    border-color: var(--bw-navy-2);
+    color: #fff;
+    box-shadow: 0 0 0 1px var(--bw-teal);
+}
+
+/* ── Responsive (match WordPress breakpoints) ────────────────────── */
+
+@media screen and (max-width: 960px) and (min-width: 783px) {
+    .bw-shell__nav     { flex: 0 0 200px; }
+    .bw-shell__content { padding: 22px; }
+}
+
+@media screen and (max-width: 782px) {
+    .bw-shell      { margin: 10px 0 0; }
+    .bw-shell__bar { border-radius: 0; }
+    .bw-shell__tag { display: none; }
+
+    .bw-shell__body { flex-direction: column; border-radius: 0; }
+
+    .bw-shell__nav {
+        flex-basis: auto;
+        padding: 6px 0;
+    }
+
+    .bw-nav__item           { padding: 13px 18px; border-left: 0; }
+    .bw-nav__item.is-active { border-left: 0; }
+
+    .bw-shell__content { padding: 18px; }
 }

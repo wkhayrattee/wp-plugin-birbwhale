@@ -20,19 +20,14 @@ defined('ABSPATH') || exit;
 class LogPage
 {
     /**
-     * Render the log page.
+     * Render the Log section's inner content (no chrome — the app shell wraps it).
+     * Called by {@see Shell::render()} for the `log` view; handles the clear-log
+     * POST inline (the form submits back to the same shell URL).
      *
      * @since 1.0.0
      */
-    public static function render(): void
+    public static function renderSection(): void
     {
-        $capability = apply_filters('birbwhale_admin_capability', Enum::ADMIN_CAPABILITY);
-        if (!current_user_can($capability)) {
-            return;
-        }
-
-        global $title;
-
         $log_file  = apply_filters('birbwhale_log_file_path', BIRBWHALE_ERROR_LOG_FILE);
         $error_msg = '';
 
@@ -49,10 +44,9 @@ class LogPage
         }
 
         Utils::loadView('admin/page-log.php', [
-            'admin_page_title' => $title ?: __('BirbWhale Log', 'birbwhale'),
-            'error_msg'        => $error_msg,
-            'txtlog_value'     => self::fetchLogData($log_file),
-            'max_lines'        => self::maxLines(),
+            'error_msg'    => $error_msg,
+            'txtlog_value' => self::fetchLogData($log_file),
+            'max_lines'    => self::maxLines(),
         ]);
     }
 

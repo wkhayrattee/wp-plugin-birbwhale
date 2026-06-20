@@ -1,13 +1,12 @@
 <?php
 
 /**
- * View: BirbWhale error-log page.
+ * View: BirbWhale Log section (inner content only — the app shell wraps it).
  *
- * Expected $args:
- *   - admin_page_title (string)
- *   - error_msg        (string) empty if none
- *   - txtlog_value     (string) log content or status message
- *   - max_lines        (int)
+ * $args:
+ *   - error_msg    (string) empty if none
+ *   - txtlog_value (string) log content or status message
+ *   - max_lines    (int)
  *
  * @package BirbWhale
  */
@@ -15,16 +14,15 @@
 defined('ABSPATH') || exit;
 
 $defaults = [
-    'admin_page_title' => 'BirbWhale Log',
-    'error_msg'        => '',
-    'txtlog_value'     => '',
-    'max_lines'        => 100,
+    'error_msg'    => '',
+    'txtlog_value' => '',
+    'max_lines'    => 100,
 ];
 $args = wp_parse_args($args, $defaults);
 ?>
-<div class="wrap birbwhale-wrap">
-    <h1><?php echo esc_html($args['admin_page_title']); ?></h1>
-    <p>
+<div class="bw-section">
+    <h2 class="bw-section__title"><?php esc_html_e('Log', 'birbwhale'); ?></h2>
+    <p class="bw-section__lead">
         <?php
         printf(
             /* translators: %d: number of log entries shown. */
@@ -44,8 +42,8 @@ $args = wp_parse_args($args, $defaults);
         <p>
             <textarea
                 name="txtlog"
-                class="large-text code"
-                style="height:450px;"
+                class="bw-log large-text code"
+                style="height:430px;"
                 wrap="off"
                 autocomplete="off"
                 autocorrect="off"

@@ -1,12 +1,11 @@
 <?php
 
 /**
- * View: BirbWhale settings / status page.
+ * View: BirbWhale Settings section (inner content only — the app shell wraps it).
  *
- * Expected $args:
- *   - page_title          (string)
+ * $args:
  *   - option_group        (string) Settings API group
- *   - menu_slug           (string) page slug for do_settings_sections()
+ *   - settings_page       (string) page id for do_settings_sections()
  *   - connectors_url      (string) URL to Settings > Connectors
  *   - credentials_url     (string) URL to get a DeepSeek API key
  *   - ai_client_available (bool)
@@ -20,9 +19,8 @@
 defined('ABSPATH') || exit;
 
 $defaults = [
-    'page_title'          => 'BirbWhale',
     'option_group'        => '',
-    'menu_slug'           => '',
+    'settings_page'       => '',
     'connectors_url'      => '',
     'credentials_url'     => '',
     'ai_client_available' => false,
@@ -32,22 +30,15 @@ $defaults = [
 ];
 $args = wp_parse_args($args, $defaults);
 ?>
-<div class="wrap birbwhale-wrap">
-    <h1><?php echo esc_html($args['page_title']); ?></h1>
-
-    <p class="birbwhale-intro">
-        <?php
-        esc_html_e(
-            'BirbWhale registers DeepSeek as a provider for the WordPress AI Client. The API key is managed by WordPress on the Connectors screen.',
-            'birbwhale'
-        );
-        ?>
+<div class="bw-section">
+    <h2 class="bw-section__title"><?php esc_html_e('Settings', 'birbwhale'); ?></h2>
+    <p class="bw-section__lead">
+        <?php esc_html_e('Enable or disable the DeepSeek connector and check its status. The API key lives on the Connectors screen.', 'birbwhale'); ?>
     </p>
 
-    <h2 class="screen-reader-text"><?php esc_html_e('Status', 'birbwhale'); ?></h2>
-    <ul class="birbwhale-status">
+    <ul class="bw-statuslist">
         <li class="<?php echo $args['ai_client_available'] ? 'is-ok' : 'is-error'; ?>">
-            <span class="dashicons <?php echo $args['ai_client_available'] ? 'dashicons-yes-alt' : 'dashicons-warning'; ?>"></span>
+            <span class="dashicons <?php echo $args['ai_client_available'] ? 'dashicons-yes-alt' : 'dashicons-warning'; ?>" aria-hidden="true"></span>
             <?php
             if ($args['ai_client_available']) {
                 printf(
@@ -60,44 +51,31 @@ $args = wp_parse_args($args, $defaults);
             }
             ?>
         </li>
-        <li class="<?php echo $args['enabled'] ? 'is-ok' : 'is-warn'; ?>">
-            <span class="dashicons <?php echo $args['enabled'] ? 'dashicons-yes-alt' : 'dashicons-marker'; ?>"></span>
-            <?php
-            echo $args['enabled']
-                ? esc_html__('Connector enabled.', 'birbwhale')
-                : esc_html__('Connector disabled.', 'birbwhale');
-            ?>
+        <li class="<?php echo $args['enabled'] ? 'is-ok' : 'is-todo'; ?>">
+            <span class="dashicons <?php echo $args['enabled'] ? 'dashicons-yes-alt' : 'dashicons-marker'; ?>" aria-hidden="true"></span>
+            <?php echo $args['enabled'] ? esc_html__('Connector enabled.', 'birbwhale') : esc_html__('Connector disabled.', 'birbwhale'); ?>
         </li>
-        <li class="<?php echo $args['has_key'] ? 'is-ok' : 'is-warn'; ?>">
-            <span class="dashicons <?php echo $args['has_key'] ? 'dashicons-yes-alt' : 'dashicons-marker'; ?>"></span>
-            <?php
-            echo $args['has_key']
-                ? esc_html__('DeepSeek API key is set.', 'birbwhale')
-                : esc_html__('No DeepSeek API key yet.', 'birbwhale');
-            ?>
+        <li class="<?php echo $args['has_key'] ? 'is-ok' : 'is-todo'; ?>">
+            <span class="dashicons <?php echo $args['has_key'] ? 'dashicons-yes-alt' : 'dashicons-marker'; ?>" aria-hidden="true"></span>
+            <?php echo $args['has_key'] ? esc_html__('DeepSeek API key is set.', 'birbwhale') : esc_html__('No DeepSeek API key yet.', 'birbwhale'); ?>
         </li>
     </ul>
 
-    <form action="options.php" method="post">
-        <?php
-        settings_fields($args['option_group']);
-        do_settings_sections($args['menu_slug']);
-        submit_button(__('Save changes', 'birbwhale'));
-        ?>
-    </form>
+    <div class="bw-card">
+        <form action="options.php" method="post">
+            <?php
+            settings_fields($args['option_group']);
+            do_settings_sections($args['settings_page']);
+            submit_button(__('Save changes', 'birbwhale'));
+            ?>
+        </form>
+    </div>
 
-    <hr />
-
-    <h2><?php esc_html_e('API key', 'birbwhale'); ?></h2>
-    <p>
-        <?php
-        esc_html_e(
-            'The DeepSeek API key is stored by WordPress and shared across plugins. Add or update it on the Connectors screen.',
-            'birbwhale'
-        );
-        ?>
+    <h3 class="bw-subhead"><?php esc_html_e('API key', 'birbwhale'); ?></h3>
+    <p class="bw-section__lead">
+        <?php esc_html_e('The DeepSeek API key is stored by WordPress and shared across plugins. Add or update it on the Connectors screen.', 'birbwhale'); ?>
     </p>
-    <p>
+    <p class="bw-actions">
         <a class="button button-secondary" href="<?php echo esc_url($args['connectors_url']); ?>">
             <?php esc_html_e('Open Settings → Connectors', 'birbwhale'); ?>
         </a>

@@ -43,14 +43,14 @@ class SettingsPage
             Enum::SETTINGS_SECTION,
             __('DeepSeek connector', 'birbwhale'),
             '__return_null',
-            Enum::MENU_SLUG_SETTINGS
+            Enum::MENU_SLUG
         );
 
         add_settings_field(
             Enum::FIELD_ENABLED,
             __('Enable connector', 'birbwhale'),
             [self::class, 'renderEnabledField'],
-            Enum::MENU_SLUG_SETTINGS,
+            Enum::MENU_SLUG,
             Enum::SETTINGS_SECTION,
             ['label_for' => Enum::FIELD_ENABLED]
         );
@@ -99,25 +99,18 @@ class SettingsPage
     }
 
     /**
-     * Render the settings/status page.
+     * Render the Settings section's inner content (no chrome — the app shell
+     * wraps it). Called by {@see Shell::render()} for the `settings` view.
      *
      * @since 1.0.0
      */
-    public static function render(): void
+    public static function renderSection(): void
     {
-        $capability = apply_filters('birbwhale_admin_capability', Enum::ADMIN_CAPABILITY);
-        if (!current_user_can($capability)) {
-            return;
-        }
-
-        global $title;
-
         $ai_client = class_exists(AiClient::class);
 
         $args = [
-            'page_title'          => $title ?: __('BirbWhale', 'birbwhale'),
             'option_group'        => Enum::SETTINGS_OPTION_GROUP,
-            'menu_slug'           => Enum::MENU_SLUG_SETTINGS,
+            'settings_page'       => Enum::MENU_SLUG,
             'connectors_url'      => admin_url('options-connectors.php'),
             'credentials_url'     => Enum::PROVIDER_CREDENTIALS_URL,
             'ai_client_available' => $ai_client,
