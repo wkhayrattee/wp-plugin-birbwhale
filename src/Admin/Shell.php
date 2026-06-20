@@ -28,6 +28,7 @@ class Shell
         Enum::VIEW_DASHBOARD,
         Enum::VIEW_SETTINGS,
         Enum::VIEW_LOG,
+        Enum::VIEW_HELP,
     ];
 
     /**
@@ -81,6 +82,9 @@ class Shell
                 break;
             case Enum::VIEW_LOG:
                 LogPage::renderSection();
+                break;
+            case Enum::VIEW_HELP:
+                HelpPage::renderSection();
                 break;
             case Enum::VIEW_DASHBOARD:
             default:
@@ -147,6 +151,8 @@ class Shell
             ['type' => 'item', 'key' => Enum::VIEW_SETTINGS, 'label' => __('Settings', 'birbwhale'), 'icon' => 'dashicons-admin-generic', 'url' => self::url(Enum::VIEW_SETTINGS)],
             ['type' => 'group', 'label' => __('Maintenance', 'birbwhale')],
             ['type' => 'item', 'key' => Enum::VIEW_LOG, 'label' => __('Log', 'birbwhale'), 'icon' => 'dashicons-warning', 'url' => self::url(Enum::VIEW_LOG)],
+            ['type' => 'group', 'label' => __('Support', 'birbwhale')],
+            ['type' => 'item', 'key' => Enum::VIEW_HELP, 'label' => __('Get Help', 'birbwhale'), 'icon' => 'dashicons-sos', 'url' => self::url(Enum::VIEW_HELP)],
         ];
 
         /**

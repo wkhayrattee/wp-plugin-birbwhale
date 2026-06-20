@@ -37,6 +37,11 @@ class Enum
     public const VIEW_DASHBOARD = 'dashboard';
     public const VIEW_SETTINGS = 'settings';
     public const VIEW_LOG = 'log';
+    public const VIEW_HELP = 'help';
+
+    // Support channels.
+    public const SUPPORT_GITHUB_URL = 'https://github.com/wkhayrattee/wp-plugin-birbwhale/issues';
+    public const SUPPORT_EMAIL = 'birbwhale@id.captainbirb.com';
 
     // Settings API.
     public const SETTINGS_OPTION_GROUP = 'birbwhale_settings_group';

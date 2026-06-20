@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
+    'BirbWhale\\Admin\\HelpPage' => $baseDir . '/src/Admin/HelpPage.php',
     'BirbWhale\\Admin\\LogPage' => $baseDir . '/src/Admin/LogPage.php',
     'BirbWhale\\Admin\\SettingsPage' => $baseDir . '/src/Admin/SettingsPage.php',
     'BirbWhale\\Admin\\Shell' => $baseDir . '/src/Admin/Shell.php',

@@ -25,6 +25,7 @@ class ComposerStaticInitad43f133cdd5481e0113c6e532f1f51d
     );
 
     public static $classMap = array (
+        'BirbWhale\\Admin\\HelpPage' => __DIR__ . '/../../..' . '/src/Admin/HelpPage.php',
         'BirbWhale\\Admin\\LogPage' => __DIR__ . '/../../..' . '/src/Admin/LogPage.php',
         'BirbWhale\\Admin\\SettingsPage' => __DIR__ . '/../../..' . '/src/Admin/SettingsPage.php',
         'BirbWhale\\Admin\\Shell' => __DIR__ . '/../../..' . '/src/Admin/Shell.php',

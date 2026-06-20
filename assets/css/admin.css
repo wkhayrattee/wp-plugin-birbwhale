@@ -258,6 +258,12 @@
 .bw-status.is-ok   { color: var(--bw-ok);   font-weight: 600; }
 .bw-status.is-todo { color: var(--bw-todo); font-weight: 600; }
 
+/* Brand-blue emphasis (e.g. the support email address) */
+.bw-email {
+    color: var(--bw-navy);
+    font-weight: 600;
+}
+
 .bw-actions {
     display: flex;
     gap: 10px;
