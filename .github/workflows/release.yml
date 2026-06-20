@@ -1,0 +1,69 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: zip
+
+      - name: Install dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Build release ZIP
+        run: |
+          VERSION="${{ github.ref_name }}"
+          PLUGIN_SLUG="birbwhale"
+
+          # Create a directory named after the plugin slug (WordPress convention)
+          mkdir -p "/tmp/${PLUGIN_SLUG}"
+
+          # Copy all files into it, excluding dev/build artifacts and files not
+          # needed at runtime. Only the runtime SVGs ship from assets/images
+          # (icon.svg, icon-menu.svg, deepseek.svg); the WordPress.org banner and
+          # large icon PNGs are repository/.org assets, not part of the plugin zip.
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='composer.json' \
+            --exclude='composer.lock' \
+            --exclude='README.md' \
+            --exclude='CHANGELOG.md' \
+            --exclude='.php-cs-fixer.php' \
+            --exclude='.php-cs-fixer.cache' \
+            --exclude='.php_cs' \
+            --exclude='.DS_Store' \
+            --exclude='assets/images/banner-*' \
+            --exclude='assets/images/icon-*.png' \
+            ./ "/tmp/${PLUGIN_SLUG}/"
+
+          # Create the ZIP from /tmp so the archive root is the plugin slug folder
+          cd /tmp
+          zip -r "${GITHUB_WORKSPACE}/${PLUGIN_SLUG}.zip" "${PLUGIN_SLUG}/"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: birbwhale.zip
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            Release of version ${{ github.ref_name }}.
+            See [CHANGELOG](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
