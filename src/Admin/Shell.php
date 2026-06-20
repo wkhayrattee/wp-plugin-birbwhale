@@ -105,7 +105,7 @@ class Shell
             'active'   => $active,
             'brand'    => __('BirbWhale', 'birbwhale'),
             'tagline'  => __('DeepSeek · AI Connector', 'birbwhale'),
-            'mark_url' => BIRBWHALE_URL . 'assets/images/deepseek.svg',
+            'mark_url' => BIRBWHALE_URL . 'assets/images/icon.svg',
             'nav'      => self::navItems($active),
             'content'  => $content,
         ]);

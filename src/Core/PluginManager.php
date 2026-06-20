@@ -214,13 +214,15 @@ class PluginManager
     }
 
     /**
-     * The admin menu icon — the DeepSeek dolphin SVG.
+     * The admin menu icon — the BirbWhale plugin icon (CaptainBirb owl + DeepSeek badge).
      *
      * @since 1.0.0
      */
     private static function menuIcon(): string
     {
-        return BIRBWHALE_URL . 'assets/images/deepseek.svg';
+        // A 20px-intrinsic build of the plugin icon — WordPress renders custom menu
+        // icons as an unconstrained <img>, so a 256px SVG would overflow the menu.
+        return BIRBWHALE_URL . 'assets/images/icon-menu.svg';
     }
 
     /**
