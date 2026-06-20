@@ -29,8 +29,9 @@ birbwhale/
 │   │   ├── PluginManager.php         Orchestrator: lifecycle, hooks, provider registration, menu
 │   │   └── Utils.php                 Logging, log rotation, template loader
 │   ├── Admin/
-│   │   ├── SettingsPage.php          Status page + enable/disable toggle
-│   │   └── LogPage.php               Error log viewer
+│   │   ├── Shell.php                 App-shell: chrome + routing for the single menu
+│   │   ├── SettingsPage.php          Settings section (enable toggle + status)
+│   │   └── LogPage.php               Log section (error log viewer)
 │   ├── Provider/
 │   │   └── DeepSeekProvider.php      Provider (identity, base URL, logo)
 │   ├── Models/
@@ -38,8 +39,29 @@ birbwhale/
 │   ├── Metadata/
 │   │   └── DeepSeekModelMetadataDirectory.php  /models listing + capability mapping
 │   └── birbwhale-plugin-helper.php   Global birbwhale_log() helper
-└── views/admin/                      Templates (no inline HTML in PHP classes)
+├── views/admin/                      Templates (no inline HTML in PHP classes)
+│   ├── shell.php                     Header bar + sidebar + content panel
+│   ├── shell-dashboard.php           Dashboard section
+│   ├── page-settings.php             Settings section
+│   ├── page-log.php                  Log section
+│   └── field-enabled.php             Enable-toggle field
+└── assets/
+    ├── css/admin.css                 Branded app-shell styles (CaptainBirb navy/teal)
+    └── images/
+        ├── icon.svg                  Plugin icon (owl + DeepSeek badge); + PNG renders
+        ├── icon-menu.svg             20px admin-menu glyph
+        ├── deepseek.svg              DeepSeek dolphin (Connectors card logo)
+        └── banner-1544x500.svg       wp.org banner; + PNG renders
 ```
+
+## Admin UI
+
+All admin screens live under a **single** top-level "BirbWhale" menu, rendered inside a
+branded **app shell** (header bar + in-page left sidebar + content panel) styled after the
+CaptainBirb theme (navy/teal, serif wordmark). `Shell` owns the chrome and routes the
+`?view=` arg (Dashboard / Settings / Log) to each section via buffer-then-wrap; the API key
+itself stays on **Settings → Connectors** (core-owned). The menu icon and header mark use the
+plugin icon (CaptainBirb owl + DeepSeek badge).
 
 ## Requirements
 
@@ -69,7 +91,7 @@ DeepSeek's `/models` endpoint (like OpenAI's) does not report capabilities, so t
 
 **Actions:** `birbwhale_loaded`, `birbwhale_deactivating`, `birbwhale_before_register_provider`, `birbwhale_after_register_provider`, `birbwhale_log_cleared`
 
-**Filters:** `birbwhale_default_settings`, `birbwhale_sanitized_settings`, `birbwhale_admin_capability`, `birbwhale_template_args`, `birbwhale_log_file_path`, `birbwhale_log_max_lines`, `birbwhale_uninstall_options`
+**Filters:** `birbwhale_default_settings`, `birbwhale_sanitized_settings`, `birbwhale_admin_capability`, `birbwhale_template_args`, `birbwhale_shell_nav`, `birbwhale_log_file_path`, `birbwhale_log_max_lines`, `birbwhale_uninstall_options`
 
 ## Trademarks & attribution
 
