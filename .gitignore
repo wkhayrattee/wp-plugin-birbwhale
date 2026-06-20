@@ -1,0 +1,23 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# AI assistant / bootstrap artifacts must NOT live in the deployable plugin repo.
+# They are kept in the workspace project instead.
+CLAUDE.md
+AGENTS.md
+.claude/
+.cursor/
+plugin.config
+
+# Logs
+*.log
+
+# Node (only if tooling is added later)
+node_modules/
+
+# Composer: the lock file and the vendor autoloader are committed (the plugin
+# ships with includes/vendor/ so it runs without a build step). Do NOT ignore it.

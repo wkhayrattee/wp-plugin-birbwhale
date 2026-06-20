@@ -1,0 +1,30 @@
+{
+    "name": "wkhayrattee/birbwhale",
+    "description": "DeepSeek AI connector for the WordPress AI Client - adds DeepSeek text generation and reasoning to WordPress.",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-only",
+    "version": "1.0.0",
+    "homepage": "https://github.com/wkhayrattee/wp-plugin-birbwhale",
+    "authors": [
+        {
+            "name": "Wasseem Khayrattee",
+            "email": "github@wk.contact",
+            "homepage": "https://github.com/wkhayrattee"
+        }
+    ],
+    "require": {
+        "php": ">=8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "BirbWhale\\": "src/"
+        },
+        "files": [
+            "src/birbwhale-plugin-helper.php"
+        ]
+    },
+    "config": {
+        "vendor-dir": "includes/vendor",
+        "optimize-autoloader": true
+    }
+}

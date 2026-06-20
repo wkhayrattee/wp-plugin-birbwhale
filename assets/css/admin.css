@@ -1,0 +1,46 @@
+/* BirbWhale admin styles */
+
+.birbwhale-wrap .birbwhale-intro {
+    max-width: 720px;
+    font-size: 14px;
+}
+
+.birbwhale-status {
+    max-width: 720px;
+    margin: 16px 0 24px;
+    padding: 0;
+    list-style: none;
+}
+
+.birbwhale-status li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 6px;
+    font-weight: 600;
+}
+
+.birbwhale-status .is-ok,
+.birbwhale-status li.is-ok {
+    color: #1a7f37;
+}
+
+.birbwhale-status li.is-ok .dashicons {
+    color: #1a7f37;
+}
+
+.birbwhale-status li.is-warn {
+    color: #8a5700;
+}
+
+.birbwhale-status li.is-warn .dashicons {
+    color: #8a5700;
+}
+
+.birbwhale-status li.is-error {
+    color: #b32d2e;
+}
+
+.birbwhale-status li.is-error .dashicons {
+    color: #b32d2e;
+}
