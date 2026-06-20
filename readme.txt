@@ -73,9 +73,13 @@ Whatever your DeepSeek account exposes via its models endpoint — typically `de
 == Changelog ==
 
 = 1.0.0 =
-* Initial release.
-* Adds the DeepSeek connector (DeepSeek-V3 and DeepSeek-R1) for the WordPress AI Client.
-* Status page (enable/disable + key status), error log, and extensibility filters.
+* DeepSeek connector for the WordPress AI Client — DeepSeek (deepseek-chat / DeepSeek-V3 and deepseek-reasoner / DeepSeek-R1) appears automatically on Settings → Connectors with a core-managed API key.
+* Branded single-menu app-shell UI (CaptainBirb navy/teal) with Dashboard, Settings, and Log sections.
+* Enable/disable toggle, a live status panel, and a nonce-protected error log.
+* Plugin icon (CaptainBirb owl + DeepSeek badge) and banner.
+* Full uninstall cleanup and birbwhale_* extensibility hooks.
+
+For a detailed, structured history see CHANGELOG.md in the source repository.
 
 == Upgrade Notice ==
 
