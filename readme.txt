@@ -69,6 +69,13 @@ Yes. BirbWhale relies on the WordPress AI Client that ships with WordPress 7.0. 
 
 All text models your DeepSeek account exposes — the list is fetched live from DeepSeek's API, so new models appear automatically. (DeepSeek is deprecating the legacy `deepseek-chat` / `deepseek-reasoner` aliases in favour of its newer models.)
 
+== Support ==
+
+Need a hand? Reach out through either channel — you'll also find these on the **BirbWhale → Get Help** screen in your dashboard:
+
+* **GitHub issues:** https://github.com/wkhayrattee/wp-plugin-birbwhale/issues — best for bugs and feature requests.
+* **Email:** birbwhale@id.captainbirb.com
+
 == Changelog ==
 
 = 1.0.0 =
