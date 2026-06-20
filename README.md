@@ -80,12 +80,9 @@ composer dump-autoload --optimize
 
 The autoloader lives in `includes/vendor/` and is committed so the plugin runs without a build step on the target site.
 
-## DeepSeek model mapping
+## DeepSeek models
 
-DeepSeek's `/models` endpoint (like OpenAI's) does not report capabilities, so they are mapped by id:
-
-- `deepseek-chat` (DeepSeek-V3) → text generation + chat history, full option set (sampling, stop, penalties, logprobs, function declarations, JSON output).
-- `deepseek-reasoner` (DeepSeek-R1) → text generation + chat history, reduced option set (R1 ignores sampling params and does not support tools/JSON output). Its `reasoning_content` is surfaced as a "thought" message part by the SDK base class.
+Models are discovered dynamically from DeepSeek's `/models` endpoint — BirbWhale hard-codes no model names, so current and future DeepSeek models (e.g. `deepseek-v4-flash`, `deepseek-v4-pro`) appear automatically. The endpoint doesn't report capabilities, so each text model is registered with `textGeneration` + `chatHistory` and the full OpenAI-compatible chat option set (system instruction, sampling, stop sequences, penalties, logprobs, function calling, JSON output). DeepSeek's "thinking"/reasoning output (`reasoning_content`) is surfaced as a "thought" message part by the SDK base class. (DeepSeek is deprecating the legacy `deepseek-chat` / `deepseek-reasoner` aliases, which are sorted last while they remain.)
 
 ## Hooks
 

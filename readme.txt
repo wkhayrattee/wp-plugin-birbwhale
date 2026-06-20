@@ -18,8 +18,7 @@ DeepSeek exposes an OpenAI-compatible API, so BirbWhale plugs straight into the 
 
 = Models =
 
-* **deepseek-chat** (DeepSeek-V3) — general text generation with the full chat option set (system instruction, sampling, stop sequences, penalties, function calling, JSON output).
-* **deepseek-reasoner** (DeepSeek-R1) — reasoning model; its reasoning output is exposed as a separate "thought" part.
+BirbWhale does not hard-code model names. It lists whatever your DeepSeek account exposes via the API, so current and future DeepSeek models appear automatically on the Connectors screen. DeepSeek's reasoning ("thinking") output is surfaced as a separate "thought" part.
 
 = How it works =
 
@@ -68,12 +67,12 @@ Yes. BirbWhale relies on the WordPress AI Client that ships with WordPress 7.0. 
 
 = Which DeepSeek models are supported? =
 
-Whatever your DeepSeek account exposes via its models endpoint — typically `deepseek-chat` (DeepSeek-V3) and `deepseek-reasoner` (DeepSeek-R1).
+All text models your DeepSeek account exposes — the list is fetched live from DeepSeek's API, so new models appear automatically. (DeepSeek is deprecating the legacy `deepseek-chat` / `deepseek-reasoner` aliases in favour of its newer models.)
 
 == Changelog ==
 
 = 1.0.0 =
-* DeepSeek connector for the WordPress AI Client — DeepSeek (deepseek-chat / DeepSeek-V3 and deepseek-reasoner / DeepSeek-R1) appears automatically on Settings → Connectors with a core-managed API key.
+* DeepSeek connector for the WordPress AI Client — DeepSeek appears automatically on Settings → Connectors with a core-managed API key; available models are discovered live from the DeepSeek API.
 * Branded single-menu app-shell UI (CaptainBirb navy/teal) with Dashboard, Settings, and Log sections.
 * Enable/disable toggle, a live status panel, and a nonce-protected error log.
 * Plugin icon (CaptainBirb owl + DeepSeek badge) and banner.

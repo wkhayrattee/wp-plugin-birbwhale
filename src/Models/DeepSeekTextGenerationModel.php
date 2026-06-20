@@ -16,7 +16,7 @@ defined('ABSPATH') || exit;
  *
  * DeepSeek implements the OpenAI Chat Completions format, so the SDK base class
  * handles request/response shaping. We only build the Request against DeepSeek's
- * base URL. Note: DeepSeek returns reasoning output for `deepseek-reasoner` in a
+ * base URL. Note: DeepSeek returns reasoning ("thinking") output in a
  * `reasoning_content` field, which the base class already maps to a "thought"
  * message part.
  *

@@ -19,14 +19,17 @@ use WordPress\AiClient\Providers\OpenAiCompatibleImplementation\AbstractOpenAiCo
 defined('ABSPATH') || exit;
 
 /**
- * Lists DeepSeek models via its OpenAI-compatible `GET /models` endpoint and maps
- * each to its capabilities and supported options.
+ * Lists DeepSeek models via its OpenAI-compatible `GET /models` endpoint.
  *
- * DeepSeek's models endpoint, like OpenAI's, does not report capabilities, so we
- * map them from the model id:
- *  - `deepseek-chat`     → DeepSeek-V3: full chat option set (sampling, tools, JSON).
- *  - `deepseek-reasoner` → DeepSeek-R1: reasoning model that ignores sampling
- *    params and does not support tools/JSON output, so it gets a reduced set.
+ * Models are discovered dynamically — no model names are hard-coded — so current
+ * and future DeepSeek models (e.g. `deepseek-v4-flash`, `deepseek-v4-pro`) appear
+ * automatically. The endpoint does not report capabilities, so each text model is
+ * registered with the full OpenAI-compatible chat option set; DeepSeek's
+ * "thinking"/reasoning output is surfaced separately as a "thought" message part
+ * by the SDK base class.
+ *
+ * Note: DeepSeek is deprecating the legacy `deepseek-chat` / `deepseek-reasoner`
+ * aliases in favour of its newer models; they are sorted last while they remain.
  *
  * @since 1.0.0
  *
@@ -72,8 +75,11 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
             CapabilityEnum::chatHistory(),
         ];
 
-        // deepseek-chat (DeepSeek-V3): full Chat Completions feature set.
-        $chatOptions = [
+        // DeepSeek's current models all support the full OpenAI-compatible Chat
+        // Completions feature set (sampling, penalties, tools, JSON output, etc.).
+        // Reasoning ("thinking") output, when present, is returned as
+        // `reasoning_content` and mapped to a "thought" part by the SDK base class.
+        $options = [
             new SupportedOption(OptionEnum::systemInstruction()),
             new SupportedOption(OptionEnum::maxTokens()),
             new SupportedOption(OptionEnum::temperature()),
@@ -91,30 +97,19 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
             new SupportedOption(OptionEnum::outputModalities(), [[ModalityEnum::text()]]),
         ];
 
-        // deepseek-reasoner (DeepSeek-R1): reasoning model — no sampling/tools/JSON.
-        $reasonerOptions = [
-            new SupportedOption(OptionEnum::systemInstruction()),
-            new SupportedOption(OptionEnum::maxTokens()),
-            new SupportedOption(OptionEnum::stopSequences()),
-            new SupportedOption(OptionEnum::customOptions()),
-            new SupportedOption(OptionEnum::inputModalities(), [[ModalityEnum::text()]]),
-            new SupportedOption(OptionEnum::outputModalities(), [[ModalityEnum::text()]]),
-        ];
-
         $models = [];
         foreach ($responseData['data'] as $modelData) {
             if (!isset($modelData['id']) || !is_string($modelData['id'])) {
                 continue;
             }
 
-            $modelId    = $modelData['id'];
-            $isReasoner = str_contains($modelId, 'reasoner') || str_contains($modelId, '-r1');
+            $modelId = $modelData['id'];
 
             $models[] = new ModelMetadata(
                 $modelId,
                 $modelId, // DeepSeek's API does not return a display name.
                 $capabilities,
-                $isReasoner ? $reasonerOptions : $chatOptions
+                $options
             );
         }
 
@@ -124,8 +119,8 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
     }
 
     /**
-     * Sort callback: surface the general chat model first, then the reasoner,
-     * then anything else alphabetically.
+     * Sort callback: current models first (alphabetically), with the deprecated
+     * legacy aliases (`deepseek-chat`, `deepseek-reasoner`) pushed to the end.
      *
      * @since 1.0.0
      *
@@ -135,18 +130,10 @@ class DeepSeekModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetada
      */
     protected function modelSortCallback(ModelMetadata $a, ModelMetadata $b): int
     {
-        $rank = static function (string $id): int {
-            if ('deepseek-chat' === $id) {
-                return 0;
-            }
-            if ('deepseek-reasoner' === $id) {
-                return 1;
-            }
-            return 2;
-        };
+        $deprecated = ['deepseek-chat', 'deepseek-reasoner'];
 
-        $rankA = $rank($a->getId());
-        $rankB = $rank($b->getId());
+        $rankA = in_array($a->getId(), $deprecated, true) ? 1 : 0;
+        $rankB = in_array($b->getId(), $deprecated, true) ? 1 : 0;
 
         if ($rankA !== $rankB) {
             return $rankA <=> $rankB;
