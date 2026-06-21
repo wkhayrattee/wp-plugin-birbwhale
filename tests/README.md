@@ -46,9 +46,26 @@ wp eval-file tests/wp-cli/live-deepseek.php
 
 ## 4. Compliance — WordPress.org Plugin Check
 
+Plugin Check scans the on-disk plugin, which includes **dev-only files** (`tests/`,
+`phpunit.xml.dist`, `.github`, `.gitignore`) that are **not shipped** — the release
+workflow strips them. Exclude them to check what actually ships:
+
 ```bash
 wp plugin check birbwhale \
-  --categories=general,plugin_repo,security,performance,accessibility
+  --categories=general,plugin_repo,security,performance,accessibility \
+  --exclude-directories=tests,.github \
+  --exclude-files=phpunit.xml.dist,.gitignore
 ```
 
-Only `.github` / `.gitignore` should remain (both stripped from the release zip).
+→ should report **0 errors / 0 warnings**. (Without the excludes you'll see ~12
+errors / ~32 warnings — all inside those dev-only files, none in the shipped code.
+Plugin Check ignores `vendor`/`.git`/`node_modules` by default, but not `tests`.)
+
+**Admin UI** (no exclude fields): either check the built release zip, or add this to a
+**dev-site mu-plugin** so the UI/CLI skip the dev files (this is dev-environment QA
+config — do NOT ship it in the plugin):
+
+```php
+add_filter( 'wp_plugin_check_ignore_directories', fn( $d ) => array_merge( $d, array( 'tests', '.github' ) ) );
+add_filter( 'wp_plugin_check_ignore_files',       fn( $f ) => array_merge( $f, array( 'phpunit.xml.dist', '.gitignore' ) ) );
+```
