@@ -23,7 +23,7 @@ $args = wp_parse_args($args, $defaults);
 <div class="bw-section">
     <h2 class="bw-section__title"><?php esc_html_e('Get Help', 'birbwhale'); ?></h2>
     <p class="bw-section__lead">
-        <?php esc_html_e('Need a hand with BirbWhale? Reach out through either channel below.', 'birbwhale'); ?>
+        <?php esc_html_e('Have a question, run into a snag, or just want to say hello? We are glad you are here. Pick whichever channel suits you below and we will be happy to help.', 'birbwhale'); ?>
     </p>
 
     <div class="bw-cards">
