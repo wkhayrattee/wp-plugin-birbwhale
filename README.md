@@ -1,4 +1,4 @@
-# BirbWhale — DeepSeek AI Connector
+# BirbWhale — AI Provider for DeepSeek
 
 > DeepSeek AI connector for the WordPress AI Client — adds DeepSeek text generation and reasoning to WordPress.
 

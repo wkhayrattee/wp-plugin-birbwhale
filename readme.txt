@@ -1,4 +1,4 @@
-=== BirbWhale — DeepSeek AI Connector ===
+=== BirbWhale — AI Provider for DeepSeek ===
 Contributors: wkhayrattee
 Tags: ai, deepseek, ai-client, connector, reasoning
 Requires at least: 7.0

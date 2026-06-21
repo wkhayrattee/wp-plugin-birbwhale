@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       BirbWhale — DeepSeek AI Connector
+ * Plugin Name:       BirbWhale — AI Provider for DeepSeek
  * Plugin URI:        https://wordpress.org/plugins/birbwhale/
  * Description:       DeepSeek AI connector for the WordPress AI Client — adds DeepSeek text generation and reasoning to WordPress.
  * Version:           1.0.0
