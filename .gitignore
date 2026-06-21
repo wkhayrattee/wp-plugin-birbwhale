@@ -24,5 +24,9 @@ phpunit.xml
 # Node (only if tooling is added later)
 node_modules/
 
-# Composer: the lock file and the vendor autoloader are committed (the plugin
-# ships with includes/vendor/ so it runs without a build step). Do NOT ignore it.
+# Composer: vendor/ is generated build output — not tracked.
+#   dev:     composer dump-autoload --optimize     (no deps to fetch — instant)
+#   release: composer install --no-dev --optimize-autoloader
+#            (the GitHub Actions release workflow runs this and bundles vendor in the zip)
+/includes/vendor/
+composer.lock
