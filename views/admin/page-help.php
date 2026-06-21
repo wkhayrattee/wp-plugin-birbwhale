@@ -53,4 +53,6 @@ $args = wp_parse_args($args, $defaults);
             </a>
         </div>
     </div>
+
+    <p class="bw-help-note"><strong><?php esc_html_e('Support language:', 'birbwhale'); ?></strong> English</p>
 </div>
