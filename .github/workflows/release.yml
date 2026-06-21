@@ -9,6 +9,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    # The default GITHUB_TOKEN is read-only; creating a Release needs write access.
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
