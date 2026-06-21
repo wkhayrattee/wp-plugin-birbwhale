@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPL-3.0-only
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-DeepSeek AI connector for the WordPress AI Client - adds DeepSeek text generation and reasoning to WordPress.
+DeepSeek AI connector for the WordPress AI Client — adds DeepSeek text generation and reasoning to WordPress.
 
 == Description ==
 
