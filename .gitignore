@@ -16,6 +16,11 @@ plugin.config
 # Logs
 *.log
 
+# PHPUnit (dev only)
+.phpunit.cache/
+.phpunit.result.cache
+phpunit.xml
+
 # Node (only if tooling is added later)
 node_modules/
 

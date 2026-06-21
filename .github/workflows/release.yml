@@ -46,6 +46,11 @@ jobs:
             --exclude='.php-cs-fixer.cache' \
             --exclude='.php_cs' \
             --exclude='.DS_Store' \
+            --exclude='tests' \
+            --exclude='phpunit.xml.dist' \
+            --exclude='phpunit.xml' \
+            --exclude='.phpunit.cache' \
+            --exclude='.phpunit.result.cache' \
             --exclude='assets/images/banner-*' \
             --exclude='assets/images/icon-*.png' \
             ./ "/tmp/${PLUGIN_SLUG}/"

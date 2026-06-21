@@ -26,5 +26,9 @@
     "config": {
         "vendor-dir": "includes/vendor",
         "optimize-autoloader": true
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:unit": "phpunit --testsuite unit"
     }
 }
