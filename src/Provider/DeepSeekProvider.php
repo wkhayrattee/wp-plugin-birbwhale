@@ -118,7 +118,11 @@ class DeepSeekProvider extends AbstractApiProvider
     }
 
     /**
-     * Absolute path to the DeepSeek logo, as WordPress core expects it.
+     * Absolute path to the DeepSeek provider logo, as WordPress core expects it.
+     *
+     * This is DeepSeek's own logo, shown on the Settings → Connectors card to
+     * identify the provider (as the official AI provider connectors do for theirs).
+     * BirbWhale's own branding (menu/header/directory icon) uses original art.
      *
      * WordPress core only converts a provider logo path to a URL when the path
      * string lives under WP_PLUGIN_DIR (see

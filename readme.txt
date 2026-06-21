@@ -39,10 +39,10 @@ No data is sent until you provide an API key (opt-in).
 
 = Trademarks & attribution =
 
-"DeepSeek" and the DeepSeek logo are trademarks of their respective owner. The DeepSeek icon bundled with this plugin is derived from DeepSeek's official logo (the dolphin mark, with the wordmark removed), sourced from:
+"DeepSeek" and the DeepSeek logo are trademarks of their respective owner. BirbWhale shows DeepSeek's logo only on the Settings → Connectors card, to identify the provider this connector integrates with — the same way the official AI provider connectors display their providers' logos. That mark (assets/images/deepseek.svg) is the dolphin from DeepSeek's official logo (wordmark removed), sourced from:
 https://github.com/deepseek-ai/DeepSeek-Coder-V2/blob/main/figures/logo.svg
 
-All rights to the DeepSeek name and logo remain with DeepSeek. The mark is used here for identification purposes only, to indicate the provider this connector integrates with.
+The plugin's own branding — its directory icon, admin-menu icon, header mark, and banner — is original artwork by the plugin author (a CaptainBirb owl with an original whale-tail motif), not based on DeepSeek's logo. All rights to the DeepSeek name and logo remain with DeepSeek.
 
 BirbWhale is an independent, third-party plugin. It is **not** affiliated with, endorsed by, sponsored by, or otherwise associated with DeepSeek (or with OpenAI, Anthropic, Google, or any other provider mentioned). Any provider names and marks are the property of their respective owners.
 
@@ -82,7 +82,7 @@ Need a hand? Reach out through either channel — you'll also find these on the 
 * DeepSeek connector for the WordPress AI Client — DeepSeek appears automatically on Settings → Connectors with a core-managed API key; available models are discovered live from the DeepSeek API.
 * Branded single-menu app-shell UI (CaptainBirb navy/teal) with Dashboard, Settings, and Log sections.
 * Enable/disable toggle, a live status panel, and a nonce-protected error log.
-* Plugin icon (CaptainBirb owl + DeepSeek badge) and banner.
+* Original plugin icon (CaptainBirb owl + whale-tail motif) and banner.
 * Full uninstall cleanup and birbwhale_* extensibility hooks.
 
 For a detailed, structured history see CHANGELOG.md in the source repository.

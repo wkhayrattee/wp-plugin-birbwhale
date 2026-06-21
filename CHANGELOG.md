@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * (admin) Branded single-menu **app shell** (header bar + in-page sidebar + content panel) styled after the CaptainBirb theme (navy/teal, serif wordmark), routing Dashboard / Settings / Log via the `view` query arg.
 * (admin) Settings section with an enable/disable toggle and a live status panel (AI Client detected, connector enabled, API key set).
 * (admin) Error log page with memory-efficient tail reading (`fseek`) and a nonce-protected clear action.
-* (branding) Plugin icon (CaptainBirb owl + DeepSeek dolphin badge), a 20px admin-menu glyph, and a WordPress.org banner.
+* (branding) Original plugin icon (CaptainBirb owl + a whale-tail motif), a 20px admin-menu glyph, and a WordPress.org banner. DeepSeek's own logo is shown only on the Connectors card to identify the provider.
 * (lifecycle) Full uninstall cleanup — plugin settings, the DeepSeek API key option, transients, and the log file.
 * (extensibility) Action and filter hooks (`birbwhale_*`) across registration, settings, the shell nav, and logging.
 

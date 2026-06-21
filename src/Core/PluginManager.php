@@ -214,7 +214,7 @@ class PluginManager
     }
 
     /**
-     * The admin menu icon — the BirbWhale plugin icon (CaptainBirb owl + DeepSeek badge).
+     * The admin menu icon — the BirbWhale plugin icon (CaptainBirb owl + whale-tail badge).
      *
      * @since 1.0.0
      */

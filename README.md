@@ -48,7 +48,7 @@ birbwhale/
 └── assets/
     ├── css/admin.css                 Branded app-shell styles (CaptainBirb navy/teal)
     └── images/
-        ├── icon.svg                  Plugin icon (owl + DeepSeek badge); + PNG renders
+        ├── icon.svg                  Plugin icon (owl + whale-tail badge); + PNG renders
         ├── icon-menu.svg             20px admin-menu glyph
         ├── deepseek.svg              DeepSeek dolphin (Connectors card logo)
         └── banner-1544x500.svg       wp.org banner; + PNG renders
@@ -61,7 +61,7 @@ branded **app shell** (header bar + in-page left sidebar + content panel) styled
 CaptainBirb theme (navy/teal, serif wordmark). `Shell` owns the chrome and routes the
 `?view=` arg (Dashboard / Settings / Log) to each section via buffer-then-wrap; the API key
 itself stays on **Settings → Connectors** (core-owned). The menu icon and header mark use the
-plugin icon (CaptainBirb owl + DeepSeek badge).
+plugin icon (CaptainBirb owl + whale-tail badge).
 
 ## Requirements
 
@@ -92,7 +92,7 @@ Models are discovered dynamically from DeepSeek's `/models` endpoint — BirbWha
 
 ## Trademarks & attribution
 
-"DeepSeek" and the DeepSeek logo are trademarks of their respective owner. The bundled DeepSeek icon (`assets/images/deepseek.svg`) is the dolphin mark cropped from DeepSeek's official logo (wordmark removed), sourced from <https://github.com/deepseek-ai/DeepSeek-Coder-V2/blob/main/figures/logo.svg>. It is used for identification purposes only; all rights remain with DeepSeek.
+"DeepSeek" and the DeepSeek logo are trademarks of their respective owner. DeepSeek's logo (`assets/images/deepseek.svg` — the dolphin from their official logo with the wordmark removed, sourced from <https://github.com/deepseek-ai/DeepSeek-Coder-V2/blob/main/figures/logo.svg>) is shown only on the Settings → Connectors card to identify the provider, as the official AI provider connectors do for theirs. The plugin's own branding (directory icon, admin-menu icon, header mark, banner) is original artwork — a CaptainBirb owl with an original whale-tail motif — not based on DeepSeek's logo.
 
 BirbWhale is an independent, third-party plugin and is **not** affiliated with, endorsed by, or sponsored by DeepSeek (or OpenAI, Anthropic, Google, or any other provider). Provider names and marks belong to their respective owners.
 
