@@ -13,6 +13,8 @@
 
 defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- View loaded via load_template(); $args and locals are template-scoped, not globals.
+
 $defaults = [
     'error_msg'    => '',
     'txtlog_value' => '',

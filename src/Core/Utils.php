@@ -46,7 +46,7 @@ class Utils
         $formatted = "[{$timestamp}] {$level}: {$message}" . PHP_EOL;
 
         if (false === @file_put_contents($log_file, $formatted, FILE_APPEND | LOCK_EX)) {
-            error_log('[BirbWhale] ' . $level . ': ' . $message);
+            error_log('[BirbWhale] ' . $level . ': ' . $message); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- last-resort fallback when writing the plugin's own log file fails.
         }
     }
 
@@ -61,20 +61,23 @@ class Utils
     {
         $keep_bytes = 1024 * 1024; // Keep last 1MB.
 
-        $fp = fopen($log_file, 'r');
+        // Direct filesystem access (phpcs:ignore below): reads the plugin's OWN log
+        // file and uses fseek() for an O(1)-memory tail read, which the WP_Filesystem
+        // API cannot do.
+        $fp = fopen($log_file, 'r'); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
         if (false === $fp) {
             return;
         }
 
         $file_size = filesize($log_file);
         if ($file_size <= $keep_bytes) {
-            fclose($fp);
+            fclose($fp); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
             return;
         }
 
         fseek($fp, $file_size - $keep_bytes, SEEK_SET);
-        $tail = fread($fp, $keep_bytes);
-        fclose($fp);
+        $tail = fread($fp, $keep_bytes); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
+        fclose($fp); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 
         if (false === $tail) {
             return;

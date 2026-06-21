@@ -40,7 +40,9 @@ foreach ($birbwhale_options as $birbwhale_option) {
 
 // Remove any of our transients.
 global $wpdb;
-$wpdb->query(
+// Direct query: a one-off uninstall cleanup of this plugin's transients by
+// option_name LIKE. Caching is irrelevant during uninstall.
+$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $wpdb->prepare(
         "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
         $wpdb->esc_like('_transient_birbwhale_') . '%',
@@ -51,9 +53,5 @@ $wpdb->query(
 // Delete the log file.
 $birbwhale_log_file = WP_CONTENT_DIR . '/birbwhale-error.log';
 if (file_exists($birbwhale_log_file)) {
-    if (function_exists('wp_delete_file')) {
-        wp_delete_file($birbwhale_log_file);
-    } else {
-        @unlink($birbwhale_log_file);
-    }
+    wp_delete_file($birbwhale_log_file);
 }

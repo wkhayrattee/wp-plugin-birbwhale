@@ -38,9 +38,10 @@ class Shell
      */
     public static function currentView(): string
     {
-        $view = isset($_GET[Enum::SHELL_VIEW_PARAM])
-            ? sanitize_key((string) $_GET[Enum::SHELL_VIEW_PARAM])
-            : Enum::VIEW_DASHBOARD;
+        // Read-only view routing: the value is unslashed, sanitized, and whitelisted
+        // below and changes no state, so no nonce is required here.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $view = isset($_GET[Enum::SHELL_VIEW_PARAM]) ? sanitize_key(wp_unslash($_GET[Enum::SHELL_VIEW_PARAM])) : Enum::VIEW_DASHBOARD;
 
         return in_array($view, self::VIEWS, true) ? $view : Enum::VIEW_DASHBOARD;
     }

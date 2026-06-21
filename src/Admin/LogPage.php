@@ -84,7 +84,7 @@ class LogPage
             return __('The log is empty.', 'birbwhale');
         }
 
-        if (!is_writable($log_file_path)) {
+        if (!is_writable($log_file_path)) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- the plugin's own log file.
             return __('[NOTICE] The log file is not writable.', 'birbwhale');
         }
 
@@ -93,15 +93,18 @@ class LogPage
             return __('The log is empty.', 'birbwhale');
         }
 
-        $fp = fopen($log_file_path, 'r');
+        // Direct filesystem access (phpcs:ignore below): reads the plugin's OWN log
+        // file via fseek() for a memory-efficient tail read (not possible with the
+        // WP_Filesystem API).
+        $fp = fopen($log_file_path, 'r'); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
         if (false === $fp) {
             return __('Unable to open the log file for reading.', 'birbwhale');
         }
 
         $read_bytes = (int) min($file_size, $tail_bytes);
         fseek($fp, -$read_bytes, SEEK_END);
-        $tail = fread($fp, $read_bytes);
-        fclose($fp);
+        $tail = fread($fp, $read_bytes); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
+        fclose($fp); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 
         if (false === $tail) {
             return __('Unable to read the log file.', 'birbwhale');
@@ -129,7 +132,7 @@ class LogPage
             return __('The log is already empty.', 'birbwhale');
         }
 
-        if (!is_writable($log_file_path)) {
+        if (!is_writable($log_file_path)) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable -- the plugin's own log file.
             return __('[NOTICE] The log file is not writable.', 'birbwhale');
         }
 

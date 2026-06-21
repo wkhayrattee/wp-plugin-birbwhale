@@ -18,6 +18,8 @@
 
 defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- View loaded via load_template(); $args and locals are template-scoped, not globals.
+
 $defaults = [
     'option_group'        => '',
     'settings_page'       => '',

@@ -52,9 +52,9 @@ class PluginManager
      */
     public static function boot(): void
     {
-        // Translations and provider registration must run on the front-end too,
-        // because AI generation can happen during any request — not only in wp-admin.
-        add_action('init', [self::class, 'loadTextdomain']);
+        // Provider registration must run on the front-end too, because AI generation
+        // can happen during any request — not only in wp-admin. (Translations load
+        // automatically on WordPress 4.6+, so no load_plugin_textdomain() is needed.)
         add_action('init', [self::class, 'registerProvider'], Enum::PROVIDER_REGISTER_PRIORITY);
 
         if (is_admin()) {
@@ -69,20 +69,6 @@ class PluginManager
          * @since 1.0.0
          */
         do_action('birbwhale_loaded');
-    }
-
-    /**
-     * Load the plugin text domain.
-     *
-     * @since 1.0.0
-     */
-    public static function loadTextdomain(): void
-    {
-        load_plugin_textdomain(
-            Enum::TEXT_DOMAIN,
-            false,
-            dirname(BIRBWHALE_BASENAME) . '/languages/'
-        );
     }
 
     /**

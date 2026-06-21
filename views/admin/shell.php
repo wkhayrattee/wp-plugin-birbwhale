@@ -19,6 +19,8 @@
 
 defined('ABSPATH') || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- View loaded via load_template(); $args and locals are template-scoped, not globals.
+
 $args = wp_parse_args($args, [
     'active'   => '',
     'brand'    => 'BirbWhale',
@@ -79,7 +81,10 @@ $args = wp_parse_args($args, [
             // them to just before this marker (top of the content panel).
             ?>
             <hr class="wp-header-end" />
-            <?php echo $args['content']; // pre-rendered, already-escaped section HTML ?>
+            <?php
+            // $args['content'] is pre-rendered section markup; each section view escapes its own output.
+            echo $args['content']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            ?>
         </main>
     </div>
 </div>

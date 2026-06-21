@@ -20,9 +20,7 @@
 declare(strict_types=1);
 
 // Prevent direct file access.
-if (!function_exists('add_action')) {
-    exit;
-}
+defined('ABSPATH') || exit;
 
 // Plugin constants.
 define('BIRBWHALE_VERSION', '1.0.0');

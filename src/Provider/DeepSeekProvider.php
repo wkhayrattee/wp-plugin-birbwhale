@@ -60,7 +60,7 @@ class DeepSeekProvider extends AbstractApiProvider
         }
 
         throw new RuntimeException(
-            sprintf('Unsupported DeepSeek model capabilities for model "%s".', $modelMetadata->getId())
+            sprintf('Unsupported DeepSeek model capabilities for model "%s".', esc_html($modelMetadata->getId()))
         );
     }
 
