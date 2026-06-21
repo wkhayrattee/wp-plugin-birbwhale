@@ -1,4 +1,4 @@
-=== BirbWhale — DeepSeek for WordPress AI ===
+=== BirbWhale — DeepSeek AI Connector ===
 Contributors: wkhayrattee
 Tags: ai, deepseek, ai-client, connector, reasoning
 Requires at least: 7.0
