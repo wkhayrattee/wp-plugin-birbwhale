@@ -44,14 +44,28 @@ try {
     $bw_ck('Provider is configured (live /models call)', false, get_class($e) . ': ' . $e->getMessage());
 }
 
-// Real text generation through DeepSeek.
+// Real text generation through DeepSeek. A unique nonce in the prompt bypasses
+// the AI Client cache, so this ALWAYS hits the live API — and we assert that
+// DeepSeek reported real token usage (proof it wasn't served from cache).
 try {
-    $bw_t0   = microtime(true);
-    $bw_text = \WordPress\AiClient\AiClient::prompt('Reply with exactly these three words and nothing else: BirbWhale works now')
+    $bw_nonce = 'BW-' . substr(md5(uniqid('', true)), 0, 12);
+    $bw_t0    = microtime(true);
+    $bw_res   = \WordPress\AiClient\AiClient::prompt("Reply with only this exact token and nothing else: {$bw_nonce}")
         ->usingProvider('deepseek')
-        ->generateText();
-    $bw_ms = (int) round((microtime(true) - $bw_t0) * 1000);
-    $bw_ck('Text generation returns a non-empty reply', trim((string) $bw_text) !== '', "{$bw_ms} ms: " . trim((string) $bw_text));
+        ->generateTextResult();
+    $bw_ms     = (int) round((microtime(true) - $bw_t0) * 1000);
+    $bw_reply  = trim($bw_res->toText());
+    $bw_tokens = $bw_res->getTokenUsage()->getTotalTokens();
+    $bw_ck(
+        'Text generation returns a non-empty reply',
+        $bw_reply !== '',
+        "{$bw_ms} ms, model {$bw_res->getModelMetadata()->getId()}: {$bw_reply}"
+    );
+    $bw_ck(
+        'DeepSeek reported real token usage (live API hit, not cached)',
+        $bw_tokens > 0,
+        "{$bw_tokens} tokens"
+    );
 } catch (\Throwable $e) {
     $bw_ck('Text generation returns a non-empty reply', false, get_class($e) . ': ' . $e->getMessage());
 }
