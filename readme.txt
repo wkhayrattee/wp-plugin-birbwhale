@@ -4,7 +4,7 @@ Tags: ai, deepseek, ai-client, connector, reasoning
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-3.0-only
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -78,6 +78,10 @@ Need a hand? Reach out through either channel — you'll also find these on the 
 
 == Changelog ==
 
+= 1.0.1 =
+* Plugin-owned files (the error log) now live under the uploads directory instead of wp-content, per the plugin directory review.
+* The connector status check now goes through the AI Client API instead of reading the core-managed API key option directly.
+
 = 1.0.0 =
 * DeepSeek connector for the WordPress AI Client — DeepSeek appears automatically on Settings → Connectors with a core-managed API key; available models are discovered live from the DeepSeek API.
 * Branded single-menu app-shell UI (CaptainBirb navy/teal) with Dashboard, Settings, and Log sections.
@@ -88,6 +92,9 @@ Need a hand? Reach out through either channel — you'll also find these on the 
 For a detailed, structured history see CHANGELOG.md in the source repository.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Moves the error log to the uploads directory and reads connector status via the AI Client API.
 
 = 1.0.0 =
 Initial release.

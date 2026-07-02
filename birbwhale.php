@@ -4,7 +4,7 @@
  * Plugin Name:       BirbWhale AI Connector with DeepSeek
  * Plugin URI:        https://wordpress.org/plugins/birbwhale/
  * Description:       DeepSeek AI connector for the WordPress AI Client — adds DeepSeek text generation and reasoning to WordPress.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 7.0
  * Requires PHP:      8.4
  * Author:            Wasseem Khayrattee
@@ -23,7 +23,7 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 // Plugin constants.
-define('BIRBWHALE_VERSION', '1.0.0');
+define('BIRBWHALE_VERSION', '1.0.1');
 define('BIRBWHALE_DIR', plugin_dir_path(__FILE__));
 define('BIRBWHALE_URL', plugin_dir_url(__FILE__));
 define('BIRBWHALE_VIEWS', BIRBWHALE_DIR . 'views/');

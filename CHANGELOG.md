@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] - 2026-07-03 ##
+
+### Changed ###
+* (naming) Display name changed to "BirbWhale AI Connector with DeepSeek" per the wordpress.org plugin review; slug (`birbwhale`) is unchanged.
+* (storage) The error log now lives under `wp-uploads/birbwhale/` instead of `wp-content/`, resolved lazily via `wp_upload_dir()`.
+* (provider) Connector status (`has_key`) is now read via `AiClient::isConfigured()` instead of the core-managed `connectors_ai_deepseek_api_key` option, cached in a short-lived transient.
+
 ## [1.0.0] - 2026-06-21 ##
 
 ### Added ###
@@ -19,4 +26,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * (lifecycle) Full uninstall cleanup — plugin settings, the DeepSeek API key option, transients, and the log file.
 * (extensibility) Action and filter hooks (`birbwhale_*`) across registration, settings, the shell nav, and logging.
 
+[1.0.1]: https://github.com/wkhayrattee/wp-plugin-birbwhale/releases/tag/1.0.1
 [1.0.0]: https://github.com/wkhayrattee/wp-plugin-birbwhale/releases/tag/1.0.0
