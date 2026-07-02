@@ -15,13 +15,11 @@ class Enum
 {
     // Plugin identity.
     public const PLUGIN_KEY = 'birbwhale';
-    public const PLUGIN_VERSION = '1.0.0';
+    public const PLUGIN_VERSION = '1.0.1';
     public const TEXT_DOMAIN = 'birbwhale';
 
     // The provider this plugin connects. Matches the AI Client provider id.
     public const PROVIDER_ID = 'deepseek';
-    // WordPress core stores the key under this option (connectors_ai_{id}_api_key).
-    public const PROVIDER_KEY_OPTION = 'connectors_ai_deepseek_api_key';
     public const PROVIDER_CREDENTIALS_URL = 'https://platform.deepseek.com/api_keys';
 
     // Capabilities.

@@ -7,6 +7,7 @@ namespace BirbWhale\Admin;
 use BirbWhale\Core\Enum;
 use BirbWhale\Core\PluginManager;
 use BirbWhale\Core\Utils;
+use BirbWhale\Provider\DeepSeekProvider;
 use WordPress\AiClient\AiClient;
 
 defined('ABSPATH') || exit;
@@ -133,7 +134,7 @@ class Shell
             'ai_client_available' => $ai,
             'ai_client_version'   => $ai ? AiClient::VERSION : '',
             'enabled'             => PluginManager::isEnabled(),
-            'has_key'             => '' !== (string) get_option(Enum::PROVIDER_KEY_OPTION, ''),
+            'has_key'             => $ai && DeepSeekProvider::isConfigured(),
         ]);
     }
 

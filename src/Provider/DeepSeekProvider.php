@@ -118,6 +118,34 @@ class DeepSeekProvider extends AbstractApiProvider
     }
 
     /**
+     * Whether DeepSeek is configured with a working API key.
+     *
+     * Delegates to the AI Client rather than reading the core-managed
+     * `connectors_ai_deepseek_api_key` option directly — the SDK owns that value.
+     * {@see AiClient::isConfigured()} verifies it with a live request, so the
+     * result is cached in a short-lived transient to avoid calling DeepSeek's API
+     * on every admin page load.
+     *
+     * @since 1.0.0
+     */
+    public static function isConfigured(): bool
+    {
+        // Same key PluginManager::deactivate() clears on deactivation.
+        $transient_key = 'birbwhale_provider_status';
+        $cached        = get_transient($transient_key);
+
+        if (false !== $cached) {
+            return (bool) $cached;
+        }
+
+        $configured = AiClient::isConfigured(self::class);
+
+        set_transient($transient_key, $configured, MINUTE_IN_SECONDS);
+
+        return $configured;
+    }
+
+    /**
      * Absolute path to the DeepSeek provider logo, as WordPress core expects it.
      *
      * This is DeepSeek's own logo, shown on the Settings → Connectors card to
