@@ -28,14 +28,27 @@ define('BIRBWHALE_DIR', plugin_dir_path(__FILE__));
 define('BIRBWHALE_URL', plugin_dir_url(__FILE__));
 define('BIRBWHALE_VIEWS', BIRBWHALE_DIR . 'views/');
 define('BIRBWHALE_BASENAME', plugin_basename(__FILE__));
-define('BIRBWHALE_ERROR_LOG_FILE', WP_CONTENT_DIR . '/birbwhale-error.log');
-
 // Cache nonce for asset versioning (cache-busting on version change).
 if (!defined('BIRBWHALE_CACHE_NONCE')) {
     define('BIRBWHALE_CACHE_NONCE', BIRBWHALE_VERSION);
 }
 
+/**
+ * Absolute path to the plugin's log file, under the uploads directory.
+ *
+ * Resolved lazily (not at plugin-load time) so it always reflects the
+ * current site's upload_dir, including on multisite.
+ *
+ * @since 1.0.0
+ */
+function birbwhale_default_log_file_path(): string
+{
+    return trailingslashit(wp_upload_dir()['basedir']) . 'birbwhale/birbwhale-error.log';
+}
+
 // Fatal error shutdown handler — catches fatal errors originating from this plugin only.
+// Deliberately avoids the BirbWhale\Core\Utils class: this must still work if the
+// fatal happened while the Composer autoloader itself was loading.
 register_shutdown_function(static function () {
     $error = error_get_last();
 
@@ -51,13 +64,14 @@ register_shutdown_function(static function () {
             $error['line']
         );
 
-        if (defined('BIRBWHALE_ERROR_LOG_FILE')) {
-            @file_put_contents(
-                BIRBWHALE_ERROR_LOG_FILE,
-                gmdate('c') . ' ' . $message . PHP_EOL,
-                FILE_APPEND
-            );
-        }
+        $log_file = birbwhale_default_log_file_path();
+        wp_mkdir_p(dirname($log_file));
+
+        @file_put_contents(
+            $log_file,
+            gmdate('c') . ' ' . $message . PHP_EOL,
+            FILE_APPEND
+        );
     }
 });
 

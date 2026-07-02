@@ -30,7 +30,7 @@ class Utils
          *
          * @param string $log_file Absolute path to the log file.
          */
-        $log_file = apply_filters('birbwhale_log_file_path', BIRBWHALE_ERROR_LOG_FILE);
+        $log_file = apply_filters('birbwhale_log_file_path', birbwhale_default_log_file_path());
 
         $log_dir = dirname($log_file);
         if (!file_exists($log_dir)) {

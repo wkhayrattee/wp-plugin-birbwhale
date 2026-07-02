@@ -51,7 +51,7 @@ $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, Word
 );
 
 // Delete the log file.
-$birbwhale_log_file = WP_CONTENT_DIR . '/birbwhale-error.log';
+$birbwhale_log_file = wp_upload_dir()['basedir'] . '/birbwhale/birbwhale-error.log';
 if (file_exists($birbwhale_log_file)) {
     wp_delete_file($birbwhale_log_file);
 }

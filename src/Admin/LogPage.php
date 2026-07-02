@@ -28,7 +28,7 @@ class LogPage
      */
     public static function renderSection(): void
     {
-        $log_file  = apply_filters('birbwhale_log_file_path', BIRBWHALE_ERROR_LOG_FILE);
+        $log_file  = apply_filters('birbwhale_log_file_path', birbwhale_default_log_file_path());
         $error_msg = '';
 
         if (isset($_POST['clearlog_btn'])) {
