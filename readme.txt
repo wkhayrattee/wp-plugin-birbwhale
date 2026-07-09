@@ -4,7 +4,7 @@ Tags: ai, deepseek, ai-client, connector, reasoning
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-3.0-only
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -78,6 +78,9 @@ Need a hand? Reach out through either channel — you'll also find these on the 
 
 == Changelog ==
 
+= 1.0.2 =
+* Lowered the minimum PHP requirement from 8.4 to 8.0, per the wordpress.org plugin directory review — the codebase has no PHP 8.1+ syntax and was verified working on PHP 8.0.
+
 = 1.0.1 =
 * Plugin-owned files (the error log) now live under the uploads directory instead of wp-content, per the plugin directory review.
 * The connector status check now goes through the AI Client API instead of reading the core-managed API key option directly.
@@ -92,6 +95,9 @@ Need a hand? Reach out through either channel — you'll also find these on the 
 For a detailed, structured history see CHANGELOG.md in the source repository.
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+Minimum PHP requirement lowered to 8.0 (previously 8.4) — no code changes for existing sites.
 
 = 1.0.1 =
 Moves the error log to the uploads directory and reads connector status via the AI Client API.

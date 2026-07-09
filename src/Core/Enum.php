@@ -15,7 +15,7 @@ class Enum
 {
     // Plugin identity.
     public const PLUGIN_KEY = 'birbwhale';
-    public const PLUGIN_VERSION = '1.0.1';
+    public const PLUGIN_VERSION = '1.0.2';
     public const TEXT_DOMAIN = 'birbwhale';
 
     // The provider this plugin connects. Matches the AI Client provider id.

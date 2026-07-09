@@ -3,7 +3,7 @@
     "description": "DeepSeek AI connector for the WordPress AI Client - adds DeepSeek text generation and reasoning to WordPress.",
     "type": "wordpress-plugin",
     "license": "GPL-3.0-only",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "homepage": "https://github.com/wkhayrattee/wp-plugin-birbwhale",
     "authors": [
         {

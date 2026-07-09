@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.2] - 2026-07-09 ##
+
+### Changed ###
+* (compatibility) Lowered the minimum PHP requirement from 8.4 to 8.0, per the wordpress.org plugin directory review — the codebase and the bundled AI Client SDK have no PHP 8.1+ syntax; verified by activating and smoke-testing on a real PHP 8.0 install.
+* (ci) The release workflow now builds the release zip on PHP 8.0, matching the plugin's declared minimum.
+
 ## [1.0.1] - 2026-07-03 ##
 
 ### Changed ###
@@ -26,5 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * (lifecycle) Full uninstall cleanup — plugin settings, the DeepSeek API key option, transients, and the log file.
 * (extensibility) Action and filter hooks (`birbwhale_*`) across registration, settings, the shell nav, and logging.
 
+[1.0.2]: https://github.com/wkhayrattee/wp-plugin-birbwhale/releases/tag/1.0.2
 [1.0.1]: https://github.com/wkhayrattee/wp-plugin-birbwhale/releases/tag/1.0.1
 [1.0.0]: https://github.com/wkhayrattee/wp-plugin-birbwhale/releases/tag/1.0.0
