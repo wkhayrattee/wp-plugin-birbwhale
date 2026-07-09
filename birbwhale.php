@@ -6,7 +6,7 @@
  * Description:       DeepSeek AI connector for the WordPress AI Client — adds DeepSeek text generation and reasoning to WordPress.
  * Version:           1.0.1
  * Requires at least: 7.0
- * Requires PHP:      8.4
+ * Requires PHP:      8.0
  * Author:            Wasseem Khayrattee
  * Author URI:        https://github.com/wkhayrattee
  * License:           GPL-3.0-only
